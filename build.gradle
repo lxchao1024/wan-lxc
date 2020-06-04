@@ -1,0 +1,57 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
+
+buildscript {
+    ext.kotlin_version = '1.3.71'
+
+    ext.retrofitVersion = '2.3.0'
+    ext.okHttp3Version = '3.9.0'
+    ext.supportLibraryVersion = '27.0.2'
+
+    ext.minSdkVersionName = 19
+    ext.targetSdkVersionName = 29
+    ext.compileSdkVersion = 29
+    ext.buildToolsVersion = '29.0.3'
+
+    repositories {
+        google()
+        jcenter()
+        maven {
+            //本地maven仓库地址
+            url uri('./repo')
+        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url'https://maven.aliyun.com/repository/public/' }
+        maven { url'https://maven.aliyun.com/repository/google/' }
+        maven { url'https://maven.aliyun.com/repository/jcenter/' }
+        maven { url'https://maven.aliyun.com/repository/central/' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.guagua.plugin:pluginswitch:1.0.0"
+
+        classpath 'com.meituan.robust:gradle-plugin:0.4.99'
+        classpath 'com.meituan.robust:auto-patch-plugin:0.4.99'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url'https://maven.aliyun.com/repository/public/' }
+        maven { url'https://maven.aliyun.com/repository/google/' }
+        maven { url'https://maven.aliyun.com/repository/jcenter/' }
+        maven { url'https://maven.aliyun.com/repository/central/' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
