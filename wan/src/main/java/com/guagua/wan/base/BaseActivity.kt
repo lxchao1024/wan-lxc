@@ -19,6 +19,7 @@ import com.guagua.wan.utils.SettingUtil
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import org.jetbrains.anko.AnkoLogger
 
 /**
  * Copyright (C), 2020-2020, guagua
@@ -29,7 +30,7 @@ import org.greenrobot.eventbus.ThreadMode
  * History:
  * <author> <time> <version> <desc>
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity(), AnkoLogger {
 
     protected var isLogin: Boolean by Preference(Constant.LOGIN_KEY, false)
 
@@ -125,11 +126,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-
     }
 
     override fun finish() {
         super.finish()
-
     }
 }
