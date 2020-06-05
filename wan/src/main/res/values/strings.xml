@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wan</string>
+    <string name="app_name">玩a</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -31,6 +31,9 @@
     <string name="nav_about_us">关于我们</string>
     <string name="nav_logout">退出登录</string>
     <string name="nav_night_mode">夜间模式</string>
+    <string name="nav_night_mode_no">普通模式</string>
+    <string name="nav_lang_zh">切换中文</string>
+    <string name="nav_lang_en">切换英文</string>
     <string name="nav_todo">TODO</string>
     <string name="nav_my_score">我的积分</string>
     <string name="nav_id">ID:</string>

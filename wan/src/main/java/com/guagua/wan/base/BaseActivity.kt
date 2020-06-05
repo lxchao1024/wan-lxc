@@ -14,6 +14,8 @@ import com.guagua.wan.R
 import com.guagua.wan.constant.Constant
 import com.guagua.wan.event.NetworkChangeEvent
 import com.guagua.wan.receiver.NetworkChangeReceiver
+import com.guagua.wan.utils.MyConWrapper
+import com.guagua.wan.utils.MyContextWrapper
 import com.guagua.wan.utils.Preference
 import com.guagua.wan.utils.SettingUtil
 import org.greenrobot.eventbus.EventBus
@@ -33,6 +35,8 @@ import org.jetbrains.anko.AnkoLogger
 abstract class BaseActivity : AppCompatActivity(), AnkoLogger {
 
     protected var isLogin: Boolean by Preference(Constant.LOGIN_KEY, false)
+
+    protected var lang: Boolean by Preference(Constant.LANG_KEY, true)
 
     protected var hasNetwork: Boolean by Preference(Constant.HAS_NETWORK_KEY, true)
 
@@ -60,6 +64,10 @@ abstract class BaseActivity : AppCompatActivity(), AnkoLogger {
 
     open fun doReConnected() {
         start()
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(MyConWrapper.wrap(newBase, "en"))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

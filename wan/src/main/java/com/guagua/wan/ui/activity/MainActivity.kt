@@ -1,6 +1,5 @@
 package com.guagua.wan.ui.activity
 
-import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -8,10 +7,10 @@ import com.google.android.material.navigation.NavigationView
 import com.guagua.wan.R
 import com.guagua.wan.base.BaseActivity
 import com.guagua.wan.utils.FragmentUtil
+import com.guagua.wan.utils.MyConWrapper
 import com.guagua.wan.utils.SettingUtil
 import com.guagua.wan.utils.ToolBarManager
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.debug
 import org.jetbrains.anko.find
 
 class MainActivity: BaseActivity(), ToolBarManager {
@@ -50,6 +49,10 @@ class MainActivity: BaseActivity(), ToolBarManager {
     private fun initNavView() {
         navView.run {
             setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
+            //动态修改item的title名称显示
+            menu.findItem(R.id.nav_night_mode).title = if (SettingUtil.getIsNightMode()) getString(R.string.nav_night_mode_no) else getString(R.string.nav_night_mode)
+            //动态隐藏某个item
+            menu.findItem(R.id.nav_language).isVisible = false
         }
     }
 
@@ -63,6 +66,10 @@ class MainActivity: BaseActivity(), ToolBarManager {
                     SettingUtil.setIsNightMode(true)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
+            }
+            R.id.nav_language -> {
+                MyConWrapper.wrap(this, "en")
+                recreate()
             }
         }
         true
