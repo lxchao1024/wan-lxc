@@ -9,15 +9,17 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.guagua.wan.R
 import com.guagua.wan.constant.Constant
 import com.guagua.wan.event.NetworkChangeEvent
 import com.guagua.wan.receiver.NetworkChangeReceiver
 import com.guagua.wan.utils.MyConWrapper
-import com.guagua.wan.utils.MyContextWrapper
 import com.guagua.wan.utils.Preference
 import com.guagua.wan.utils.SettingUtil
+import com.guagua.wan.view.GToolBar
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -32,7 +34,7 @@ import org.jetbrains.anko.AnkoLogger
  * History:
  * <author> <time> <version> <desc>
  */
-abstract class BaseActivity : AppCompatActivity(), AnkoLogger {
+abstract class BaseActivity: AppCompatActivity(), AnkoLogger, GToolBar.OnGGToolbarClickListener {
 
     protected var isLogin: Boolean by Preference(Constant.LOGIN_KEY, false)
 
@@ -61,6 +63,11 @@ abstract class BaseActivity : AppCompatActivity(), AnkoLogger {
     open fun useEventBus(): Boolean = true
 
     open fun enableNetworkTip(): Boolean = true
+
+    protected var mButtonLeft: ImageButton? = null
+    protected var mButtonRight: ImageButton? = null
+    protected var mRightTitleView: TextView? = null
+    protected var mToolbar: GToolBar? = null
 
     open fun doReConnected() {
         start()
@@ -122,6 +129,53 @@ abstract class BaseActivity : AppCompatActivity(), AnkoLogger {
     fun onNetworkChangeEvent(event: NetworkChangeEvent) {
         Log.e("BaseActivity", "onNetworkChangeEvent(), isConnected:" + event.isConnected)
         hasNetwork = event.isConnected
+    }
+
+    override fun onLeftBtnClick(v: View?) {
+        finish()
+    }
+
+    override fun onRightBtnClick(v: View?) {
+    }
+
+    override fun onRightTextClick(v: View?) {
+    }
+
+    protected fun setGToolBar(bar: GToolBar) {
+        this.mToolbar = bar
+        mToolbar?.visibility = View.VISIBLE
+        mToolbar?.setOnGGToolbarClickListener(this)
+    }
+
+    override fun setTitle(title: CharSequence?) {
+        mToolbar?.title = title
+    }
+
+    override fun setTitle(titleId: Int) {
+        mToolbar?.setTitle(titleId)
+    }
+
+    open fun setTitle(title: CharSequence?, isBold: Boolean) {
+        mToolbar?.title = title
+        mToolbar?.setTitleBold(isBold)
+    }
+
+    protected fun setRightBtnDrawable(resId: Int): ImageButton? {
+        mToolbar?.let {
+            mButtonRight = it.setRightBtnDrawable(resId)
+            mButtonRight?.visibility = View.VISIBLE
+            return@let
+        }
+        return null
+    }
+
+    protected fun setLeftBtnDrawable(resId: Int): ImageButton? {
+        mToolbar?.let {
+            mButtonLeft = it.setLeftBtnDrawable(resId)
+            mButtonLeft!!.visibility = View.VISIBLE
+            return@let
+        }
+        return null
     }
 
     override fun onPause() {

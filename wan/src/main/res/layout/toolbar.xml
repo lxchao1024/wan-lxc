@@ -4,9 +4,19 @@
     android:id="@+id/toolBar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    app:titleTextColor="@color/white"
     android:background="@color/colorPrimary"
+    android:orientation="vertical"
     app:popupTheme="@style/AppTheme.PopupOverlay"
-    app:titleTextAppearance="@style/Toolbar.TitleText"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    android:orientation="vertical" />
+    app:titleTextAppearance="@style/Toolbar.TitleText"
+    app:contentInsetStart="0dp"
+    app:titleTextColor="@color/white">
+
+    <TextView
+        android:id="@+id/toolBarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:singleLine="true"
+        android:textSize="20sp" />
+</androidx.appcompat.widget.Toolbar>

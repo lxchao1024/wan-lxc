@@ -1,5 +1,6 @@
 package com.guagua.wan.ui.activity
 
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -16,6 +17,7 @@ import org.jetbrains.anko.find
 class MainActivity: BaseActivity(), ToolBarManager {
 
     override val toolBar: Toolbar by lazy { find<Toolbar>(R.id.toolBar) }
+    override val toolbarTitle: TextView by lazy { find<TextView>(R.id.toolBarTitle) }
 
     override fun attachLayoutRes(): Int = R.layout.activity_main
 
@@ -27,6 +29,7 @@ class MainActivity: BaseActivity(), ToolBarManager {
 
     override fun initView() {
         bottomBar.setOnTabSelectListener {
+            changeMainToolBarTitle(it)
             FragmentUtil.instances.getFragment(it)?.let { fragment ->
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.container, fragment)

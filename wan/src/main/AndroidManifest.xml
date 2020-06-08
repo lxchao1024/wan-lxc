@@ -27,6 +27,7 @@
             android:value="640" />
 
         <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.SettingsActivity" />
 
         <receiver android:name=".receiver.NetworkChangeReceiver" />
     </application>

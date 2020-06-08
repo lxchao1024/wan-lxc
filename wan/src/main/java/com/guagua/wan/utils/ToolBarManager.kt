@@ -1,7 +1,11 @@
 package com.guagua.wan.utils
 
+import android.content.Intent
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.guagua.wan.R
+import com.guagua.wan.ui.activity.SettingsActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -15,12 +19,23 @@ import org.jetbrains.anko.toast
  */
 interface ToolBarManager {
     val toolBar: Toolbar
+    val toolbarTitle: TextView
     fun initMainToolBar() {
-        toolBar.title = "呱呱影音"
+        toolBar.title = ""
         toolBar.inflateMenu(R.menu.setting)
         toolBar.setOnMenuItemClickListener {
-            toolBar.context.toast("设置点击了")
+            toolBar.context.startActivity(Intent(toolBar.context, SettingsActivity::class.java))
             true
+        }
+    }
+
+    fun changeMainToolBarTitle(tabIndex: Int) {
+        Log.d("ToolBarManager", "changeMainToolBar(), tabIndex:$tabIndex")
+        when (tabIndex) {
+            R.id.tab_home -> toolbarTitle.text = "呱呱"
+            R.id.tab_mv -> toolbarTitle.text = "MV"
+            R.id.tab_vbang -> toolbarTitle.text = "排行"
+            R.id.tab_yuedan -> toolbarTitle.text = "我的"
         }
     }
 }

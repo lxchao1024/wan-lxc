@@ -4,8 +4,6 @@ import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import com.guagua.wan.base.BaseFragment
-import org.jetbrains.anko.debug
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * Copyright (C), 2020-2020, guagua
