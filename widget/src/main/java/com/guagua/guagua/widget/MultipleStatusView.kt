@@ -175,7 +175,7 @@ class MultipleStatusView @JvmOverloads constructor(
         showViewById(mLoadingView!!.id)
     }
 
-    private fun showContent() {
+    fun showContent() {
         mViewStatus = STATUS_CONTENT
         if (null == mContentView && mContentViewResId != NULL_RESOURCE_ID) {
             mContentView = mInflater.inflate(mContentViewResId, null)

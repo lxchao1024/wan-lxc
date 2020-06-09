@@ -8,5 +8,9 @@
     app:loadingView="@layout/loading_view"
     app:noNetworkView="@layout/no_network_view"
     android:layout_height="match_parent">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Hello, world" />
 </com.guagua.guagua.widget.MultipleStatusView>

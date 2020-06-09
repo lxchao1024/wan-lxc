@@ -1,5 +1,6 @@
 package com.guagua.wan.ui.fragment
 
+import android.os.Handler
 import android.view.View
 import com.guagua.wan.R
 import com.guagua.wan.base.BaseFragment
@@ -20,7 +21,9 @@ class HomeFragment: BaseFragment() {
 
     override fun initView(view: View){
         mLayoutStatusView = multipleView
-        mLayoutStatusView?.showEmpty()
+        Handler().postDelayed({
+            mLayoutStatusView?.showEmpty()
+        }, 2300L)
     }
 
     override fun initData() {

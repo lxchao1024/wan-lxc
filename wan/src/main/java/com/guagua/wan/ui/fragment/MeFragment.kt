@@ -5,7 +5,6 @@ import android.view.View
 import com.guagua.wan.R
 import com.guagua.wan.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_me.*
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * Copyright (C), 2020-2020, guagua
@@ -19,15 +18,19 @@ import org.jetbrains.anko.support.v4.toast
 class MeFragment: BaseFragment() {
     override fun initView(view: View) {
         mLayoutStatusView = multipleView
-        Handler().postDelayed({
-            mLayoutStatusView?.showNoNetwork()
-        }, 3000L)
+        showError()
     }
 
     override fun attachLayoutRes(): Int = R.layout.fragment_me
 
     override fun lazyLoad() {
-        toast("正在重试")
+        mLayoutStatusView?.showLoading()
+        showError()
     }
 
+    private fun showError() {
+        Handler().postDelayed({
+            mLayoutStatusView?.showNoNetwork()
+        }, 3000L)
+    }
 }

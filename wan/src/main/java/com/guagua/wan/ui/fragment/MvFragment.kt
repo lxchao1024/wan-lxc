@@ -1,10 +1,10 @@
 package com.guagua.wan.ui.fragment
 
-import android.view.Gravity
+import android.os.Handler
 import android.view.View
-import android.widget.TextView
 import com.guagua.wan.R
 import com.guagua.wan.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * Copyright (C), 2020-2020, guagua
@@ -17,10 +17,13 @@ import com.guagua.wan.base.BaseFragment
  */
 class MvFragment: BaseFragment() {
     override fun initView(view: View) {
-
+        mLayoutStatusView = multipleView
+        Handler().postDelayed({
+            mLayoutStatusView?.showError()
+        }, 3000L)
     }
 
-    override fun attachLayoutRes(): Int = R.layout.no_network_view
+    override fun attachLayoutRes(): Int = R.layout.fragment_home
 
     override fun lazyLoad() {
     }
