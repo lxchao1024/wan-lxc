@@ -1,8 +1,7 @@
 package com.guagua.wan.ui.fragment
 
-import android.view.Gravity
 import android.view.View
-import android.widget.TextView
+import com.guagua.wan.R
 import com.guagua.wan.base.BaseFragment
 
 /**
@@ -15,11 +14,12 @@ import com.guagua.wan.base.BaseFragment
  * <author> <time> <version> <desc>
  */
 class RankFragment: BaseFragment() {
-    override fun initView(): View? {
-        val textView = TextView(activity)
-        textView.gravity = Gravity.CENTER
-        textView.text = javaClass.simpleName
-        textView.textSize = 18.0f
-        return textView
+    override fun initView(view: View) {
+
+    }
+
+    override fun attachLayoutRes(): Int = R.layout.fragment_home
+
+    override fun lazyLoad() {
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.guagua.guagua.widget.MultipleStatusView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:errorView="@layout/error_view"
+    app:emptyView="@layout/empty_view"
+    android:id="@+id/multipleView"
+    app:loadingView="@layout/loading_view"
+    app:noNetworkView="@layout/no_network_view"
+    android:layout_height="match_parent">
+
+</com.guagua.guagua.widget.MultipleStatusView>

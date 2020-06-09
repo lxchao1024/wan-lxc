@@ -1,9 +1,11 @@
 package com.guagua.wan.ui.fragment
 
-import android.view.Gravity
+import android.os.Handler
 import android.view.View
-import android.widget.TextView
+import com.guagua.wan.R
 import com.guagua.wan.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_me.*
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * Copyright (C), 2020-2020, guagua
@@ -15,11 +17,17 @@ import com.guagua.wan.base.BaseFragment
  * <author> <time> <version> <desc>
  */
 class MeFragment: BaseFragment() {
-    override fun initView(): View? {
-        val textView = TextView(activity)
-        textView.gravity = Gravity.CENTER
-        textView.text = javaClass.simpleName
-        textView.textSize = 18.0f
-        return textView
+    override fun initView(view: View) {
+        mLayoutStatusView = multipleView
+        Handler().postDelayed({
+            mLayoutStatusView?.showNoNetwork()
+        }, 3000L)
     }
+
+    override fun attachLayoutRes(): Int = R.layout.fragment_me
+
+    override fun lazyLoad() {
+        toast("正在重试")
+    }
+
 }

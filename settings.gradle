@@ -1,3 +1,4 @@
+include ':widget'
 rootProject.name='Gradle363'
 include ':app'
 include ':client'

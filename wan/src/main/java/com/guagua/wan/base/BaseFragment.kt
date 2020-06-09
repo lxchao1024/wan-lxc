@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.guagua.guagua.widget.MultipleStatusView
 import org.jetbrains.anko.AnkoLogger
 
 /**
@@ -17,17 +18,23 @@ import org.jetbrains.anko.AnkoLogger
  * <author> <time> <version> <desc>
  */
 abstract class BaseFragment: Fragment(), AnkoLogger {
+
+    protected var mLayoutStatusView: MultipleStatusView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return initView()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater?.inflate(attachLayoutRes(), null)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView(view)
+        mLayoutStatusView?.setOnRetryClickListener(mRetryClickListener)
+        mLayoutStatusView?.showLoading()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -40,7 +47,7 @@ abstract class BaseFragment: Fragment(), AnkoLogger {
 
     }
 
-    abstract fun initView(): View?
+    abstract fun initView(view: View)
 
 
     open fun initListener() {
@@ -49,5 +56,12 @@ abstract class BaseFragment: Fragment(), AnkoLogger {
 
     open fun initData() {
 
+    }
+    abstract fun attachLayoutRes(): Int
+
+    abstract fun lazyLoad()
+
+    open val mRetryClickListener = View.OnClickListener {
+        lazyLoad()
     }
 }

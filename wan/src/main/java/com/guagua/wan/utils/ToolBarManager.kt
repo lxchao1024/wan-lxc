@@ -1,12 +1,10 @@
 package com.guagua.wan.utils
 
 import android.content.Intent
-import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.guagua.wan.R
 import com.guagua.wan.ui.activity.SettingsActivity
-import org.jetbrains.anko.toast
 
 /**
  * Copyright (C), 2020-2020, guagua
@@ -30,7 +28,6 @@ interface ToolBarManager {
     }
 
     fun changeMainToolBarTitle(tabIndex: Int) {
-        Log.d("ToolBarManager", "changeMainToolBar(), tabIndex:$tabIndex")
         when (tabIndex) {
             R.id.tab_home -> toolbarTitle.text = "呱呱"
             R.id.tab_mv -> toolbarTitle.text = "MV"

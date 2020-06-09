@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="empty_view_hint">No Data</string>
+    <string name="error_view_hint">Load Failed</string>
+    <string name="no_network_view_hint">Network Error</string>
+</resources>

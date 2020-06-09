@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.guagua.guagua.widget.MultipleStatusView
 import com.guagua.wan.R
 import com.guagua.wan.constant.Constant
 import com.guagua.wan.event.NetworkChangeEvent
@@ -46,7 +47,7 @@ abstract class BaseActivity: AppCompatActivity(), AnkoLogger, GToolBar.OnGGToolb
 
     protected var mThemeColor: Int = SettingUtil.getColor()
 
-//    protected var mLayoutStatusView: MultipleStatusView? = null
+    protected var mLayoutStatusView: MultipleStatusView? = null
 
     protected lateinit var mTipView: View
     protected lateinit var mWindowManager: WindowManager
@@ -81,7 +82,6 @@ abstract class BaseActivity: AppCompatActivity(), AnkoLogger, GToolBar.OnGGToolb
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         super.onCreate(savedInstanceState)
         setContentView(attachLayoutRes())
-
         if (useEventBus()) {
             EventBus.getDefault().register(this)
         }
