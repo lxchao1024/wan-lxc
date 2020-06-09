@@ -6,11 +6,16 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_error" />
+
     <TextView
+        android:id="@id/no_network_retry_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@id/no_network_retry_view"
         android:text="@string/no_network_tip"
         android:textColor="@color/common_color" />
 
