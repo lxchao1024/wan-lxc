@@ -35,10 +35,6 @@ abstract class BaseFragment: Fragment(), AnkoLogger {
         initView(view)
         mLayoutStatusView?.setOnRetryClickListener(mRetryClickListener)
         mLayoutStatusView?.showLoading()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         initListener()
         initData()
     }
