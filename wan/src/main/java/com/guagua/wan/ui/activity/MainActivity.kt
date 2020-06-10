@@ -13,11 +13,14 @@ import com.guagua.wan.utils.SettingUtil
 import com.guagua.wan.utils.ToolBarManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
+import org.jetbrains.anko.toast
 
 class MainActivity: BaseActivity(), ToolBarManager {
 
     override val toolBar: Toolbar by lazy { find<Toolbar>(R.id.toolBar) }
     override val toolbarTitle: TextView by lazy { find<TextView>(R.id.toolBarTitle) }
+
+    private var firstTime: Long = 0L
 
     override fun attachLayoutRes(): Int = R.layout.activity_main
 
@@ -76,5 +79,14 @@ class MainActivity: BaseActivity(), ToolBarManager {
             }
         }
         true
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis().minus(firstTime) <= 2000L) {
+            finish()
+        } else {
+            firstTime = System.currentTimeMillis()
+            toast(getString(R.string.exit_tip))
+        }
     }
 }

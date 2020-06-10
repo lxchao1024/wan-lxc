@@ -1,6 +1,5 @@
 package com.guagua.wan.ui.fragment
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import cn.bingoogolapple.bgabanner.BGABanner
@@ -50,7 +49,6 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
     override fun createPresenter(): HomeContract.Presenter = HomePresenter()
 
     override fun setBanner(result: List<Banner>) {
-        result?.forEach { Log.d("HomeFragment", "url: ${it.url}") }
         banners = result as ArrayList<Banner>
         val urls = ArrayList<String>()
         val titles = ArrayList<String>()
@@ -77,7 +75,7 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
     }
 
     private val bannerAdapter: BGABanner.Adapter<ImageView, String> by lazy {
-        BGABanner.Adapter<ImageView, String> { bgaBanner, imageView, feedImageUrl, position ->
+        BGABanner.Adapter<ImageView, String> { _, imageView, feedImageUrl, _ ->
             ImageLoader.load(activity, feedImageUrl, imageView)
         }
     }
