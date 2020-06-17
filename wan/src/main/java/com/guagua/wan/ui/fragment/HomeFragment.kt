@@ -2,6 +2,7 @@ package com.guagua.wan.ui.fragment
 
 import android.view.View
 import android.widget.ImageView
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.bingoogolapple.bgabanner.BGABanner
@@ -77,6 +78,7 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
             addHeaderView(bannerView)
         }
         recyclerView.adapter = homeAdapter
+        recyclerView.itemAnimator = DefaultItemAnimator()
     }
 
     override fun initData() {
@@ -87,7 +89,6 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
         mLayoutStatusView?.showLoading()
         mPresenter?.requestHomeData()
     }
-
 
     override fun setBanner(result: List<Banner>) {
         banners = result as ArrayList<Banner>

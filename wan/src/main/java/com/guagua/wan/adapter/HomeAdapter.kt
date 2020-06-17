@@ -29,9 +29,7 @@ class HomeAdapter(private val context: Context?, datas: MutableList<Article>): B
         helper.setText(R.id.tv_article_title, Html.fromHtml(item.title))
             .setText(R.id.tv_article_author, authorStr)
             .setText(R.id.tv_article_date, item.niceDate)
-            .setImageResource(R.id.iv_like,
-                if (item.collect) R.drawable.ic_like else R.drawable.ic_like_not
-            )
+            .setImageResource(R.id.iv_like, if (item.collect) R.drawable.ic_like else R.drawable.ic_like_not)
             .addOnClickListener(R.id.iv_like)
         val chapterName = when {
             item.superChapterName.isNotEmpty() and item.chapterName.isNotEmpty() ->
@@ -51,24 +49,24 @@ class HomeAdapter(private val context: Context?, datas: MutableList<Article>): B
             helper.getView<ImageView>(R.id.iv_article_thumbnail)
                 .visibility = View.GONE
         }
-        val tv_fresh = helper.getView<TextView>(R.id.tv_article_fresh)
+        val tvFresh = helper.getView<TextView>(R.id.tv_article_fresh)
         if (item.fresh) {
-            tv_fresh.visibility = View.VISIBLE
+            tvFresh.visibility = View.VISIBLE
         } else {
-            tv_fresh.visibility = View.GONE
+            tvFresh.visibility = View.GONE
         }
-        val tv_top = helper.getView<TextView>(R.id.tv_article_top)
+        val tvTop = helper.getView<TextView>(R.id.tv_article_top)
         if (item.top == "1") {
-            tv_top.visibility = View.VISIBLE
+            tvTop.visibility = View.VISIBLE
         } else {
-            tv_top.visibility = View.GONE
+            tvTop.visibility = View.GONE
         }
-        val tv_article_tag = helper.getView<TextView>(R.id.tv_article_tag)
+        val tvArticleTag = helper.getView<TextView>(R.id.tv_article_tag)
         if (item.tags.size > 0) {
-            tv_article_tag.visibility = View.VISIBLE
-            tv_article_tag.text = item.tags[0].name
+            tvArticleTag.visibility = View.VISIBLE
+            tvArticleTag.text = item.tags[0].name
         } else {
-            tv_article_tag.visibility = View.GONE
+            tvArticleTag.visibility = View.GONE
         }
     }
 }
