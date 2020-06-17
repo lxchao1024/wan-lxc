@@ -52,17 +52,6 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
         LinearLayoutManager(activity)
     }
 
-    private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
-        isRefresh = true
-        mPresenter?.requestHomeData()
-    }
-
-    private val onRequestLoadMoreListener = BaseQuickAdapter.RequestLoadMoreListener {
-        isRefresh = false
-        swipeRefreshLayout.isRefreshing = false
-        mPresenter?.requestArticles(homeAdapter?.data?.size?.div(20) ?: 1)
-    }
-
     override fun initView(view: View){
         super.initView(view)
         mLayoutStatusView = multipleView
@@ -84,6 +73,7 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
         homeAdapter = HomeAdapter(context, datas)
         homeAdapter?.run {
             setOnLoadMoreListener(onRequestLoadMoreListener, recyclerView)
+            onItemClickListener = this@HomeFragment.onItemClickListener
             addHeaderView(bannerView)
         }
         recyclerView.adapter = homeAdapter
@@ -156,6 +146,24 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
     private val bannerDelegate = Delegate<ImageView, String> { _, _, _, position ->
         if (banners.size > 0) {
             val data = banners[position]
+            toast(data.title)
+        }
+    }
+
+    private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        isRefresh = true
+        mPresenter?.requestHomeData()
+    }
+
+    private val onRequestLoadMoreListener = BaseQuickAdapter.RequestLoadMoreListener {
+        isRefresh = false
+        swipeRefreshLayout.isRefreshing = false
+        mPresenter?.requestArticles(homeAdapter?.data?.size?.div(20) ?: 1)
+    }
+
+    private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
+        if (datas.size != 0) {
+            val data = datas[position]
             toast(data.title)
         }
     }
