@@ -2,16 +2,22 @@ package com.guagua.wan.ui.fragment
 
 import android.view.View
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.bingoogolapple.bgabanner.BGABanner
 import cn.bingoogolapple.bgabanner.BGABanner.Delegate
 import com.guagua.wan.R
+import com.guagua.wan.adapter.HomeAdapter
 import com.guagua.wan.base.BaseMvpFragment
+import com.guagua.wan.model.bean.Article
+import com.guagua.wan.model.bean.ArticleResponseBody
 import com.guagua.wan.model.bean.Banner
 import com.guagua.wan.mvp.contract.HomeContract
 import com.guagua.wan.mvp.presenter.HomePresenter
 import com.guagua.wan.utils.ImageLoader
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_home_banner.view.*
 import org.jetbrains.anko.support.v4.toast
 
 /**
@@ -27,26 +33,64 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
 
     private lateinit var banners: ArrayList<Banner>
 
+    private val datas = mutableListOf<Article>()
+
+    private var bannerView: View? = null
+
     override fun attachLayoutRes(): Int = R.layout.fragment_home
+
+    override fun createPresenter(): HomeContract.Presenter = HomePresenter()
+
+    private var homeAdapter: HomeAdapter? = null
+
+    private var isInit = false
+
+    /**
+     * is Refresh
+     */
+    private var isRefresh = true
+
+    private val linearLayoutManager: LinearLayoutManager by lazy {
+        LinearLayoutManager(activity)
+    }
+
+    private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        isRefresh = true
+        mPresenter?.requestHomeData()
+    }
 
     override fun initView(view: View){
         super.initView(view)
         mLayoutStatusView = multipleView
-        mContentBanner.run {
+
+        swipeRefreshLayout.run {
+            setOnRefreshListener(onRefreshListener)
+        }
+
+        bannerView = layoutInflater.inflate(R.layout.item_home_banner, null)
+        bannerView?.banner?.run {
             setDelegate(bannerDelegate)
         }
+
+        isInit = true
+
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        homeAdapter = HomeAdapter(context, datas)
+        homeAdapter?.run {
+            addHeaderView(bannerView)
+        }
+        recyclerView.adapter = homeAdapter
     }
 
     override fun initData() {
-        mPresenter?.requestBanner()
+        mPresenter?.requestHomeData()
     }
 
     override fun lazyLoad() {
         mLayoutStatusView?.showLoading()
-        mPresenter?.requestBanner()
+        mPresenter?.requestHomeData()
     }
 
-    override fun createPresenter(): HomeContract.Presenter = HomePresenter()
 
     override fun setBanner(result: List<Banner>) {
         banners = result as ArrayList<Banner>
@@ -57,13 +101,29 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
             urls.add(list.imagePath)
             titles.add(list.title)
         }
-
-        mContentBanner.run {
+        bannerView?.banner?.run {
             setAutoPlayAble(banners.size > 0)
             setData(urls, titles)
             setAdapter(bannerAdapter)
         }
         mLayoutStatusView?.showContent()
+    }
+
+    override fun scrollToTop() {
+
+    }
+
+    override fun setArticles(articles: ArticleResponseBody) {
+        articles.datas.let {
+            homeAdapter?.run {
+                if (it.count() > 1) {
+                    replaceData(it)
+                } else {
+                    replaceData(it)
+                }
+            }
+        }
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun showCollectSuccess(success: Boolean) {

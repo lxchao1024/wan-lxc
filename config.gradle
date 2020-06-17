@@ -49,6 +49,8 @@ ext {
     commonDeps = [
             "glide"                 : "com.github.bumptech.glide:glide:${dependVersion.glideSdkVersion}",
             "brvh"                  : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.35',
+            "statusbar"             : 'com.jaeger.statusbarutil:library:1.5.1',
+            "flycotab"              : 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar',
             "banner"                : 'cn.bingoogolapple:bga-banner:2.2.4@aar',
             "agentweb"              : 'com.just.agentweb:agentweb:4.0.2',
             "multidex"              : 'com.android.support:multidex:1.0.3',

@@ -21,8 +21,10 @@ object ImageLoader {
     fun load(context: Context?, url: String?, iv: ImageView?) {
         iv?.apply {
             Glide.with(context!!).clear(iv)
-            val options = RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(R.drawable.bg_placeholder)
-            Glide.with(context!!).load(url).transition(DrawableTransitionOptions.withCrossFade()).apply(options).into(iv)
+            val options = RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA)
+                .placeholder(R.drawable.bg_placeholder)
+            Glide.with(context!!).load(url).transition(DrawableTransitionOptions.withCrossFade())
+                .apply(options).into(iv)
         }
     }
 }

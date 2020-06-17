@@ -23,4 +23,15 @@ class HomePresenter : CommonPresenter<HomeContract.Model, HomeContract.View>(), 
         }
     }
 
+    override fun requestHomeData() {
+        requestBanner()
+        requestArticles(0)
+    }
+
+    override fun requestArticles(num: Int) {
+        mModel?.requestArticles(num)?.ss(mModel, mView, false) {
+            mView?.setArticles(it.data)
+        }
+    }
+
 }
