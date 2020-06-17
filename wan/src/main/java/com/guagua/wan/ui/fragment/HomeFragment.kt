@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.bingoogolapple.bgabanner.BGABanner
 import cn.bingoogolapple.bgabanner.BGABanner.Delegate
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.guagua.wan.R
 import com.guagua.wan.adapter.HomeAdapter
 import com.guagua.wan.base.BaseMvpFragment
@@ -45,9 +46,6 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
 
     private var isInit = false
 
-    /**
-     * is Refresh
-     */
     private var isRefresh = true
 
     private val linearLayoutManager: LinearLayoutManager by lazy {
@@ -57,6 +55,12 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
     private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
         isRefresh = true
         mPresenter?.requestHomeData()
+    }
+
+    private val onRequestLoadMoreListener = BaseQuickAdapter.RequestLoadMoreListener {
+        isRefresh = false
+        swipeRefreshLayout.isRefreshing = false
+        mPresenter?.requestArticles(homeAdapter?.data?.size?.div(20) ?: 1)
     }
 
     override fun initView(view: View){
@@ -73,10 +77,13 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
         }
 
         isInit = true
+        datas.clear()
+        homeAdapter?.notifyDataSetChanged()
 
         recyclerView.layoutManager = LinearLayoutManager(activity)
         homeAdapter = HomeAdapter(context, datas)
         homeAdapter?.run {
+            setOnLoadMoreListener(onRequestLoadMoreListener, recyclerView)
             addHeaderView(bannerView)
         }
         recyclerView.adapter = homeAdapter
@@ -116,10 +123,16 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
     override fun setArticles(articles: ArticleResponseBody) {
         articles.datas.let {
             homeAdapter?.run {
-                if (it.count() > 1) {
+                if (swipeRefreshLayout.isRefreshing) {
                     replaceData(it)
                 } else {
-                    replaceData(it)
+                    addData(it)
+                }
+                val size = it.size
+                if (size < articles.size) {
+                    loadMoreEnd(isRefresh)
+                } else {
+                    loadMoreComplete()
                 }
             }
         }
