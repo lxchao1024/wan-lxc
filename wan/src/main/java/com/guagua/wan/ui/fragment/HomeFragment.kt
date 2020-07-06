@@ -1,5 +1,6 @@
 package com.guagua.wan.ui.fragment
 
+import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -56,7 +57,7 @@ class HomeFragment: BaseMvpFragment<HomeContract.View, HomeContract.Presenter>()
     override fun initView(view: View){
         super.initView(view)
         mLayoutStatusView = multipleView
-
+        swipeRefreshLayout.setColorSchemeColors(Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.BLACK)
         swipeRefreshLayout.run {
             setOnRefreshListener(onRefreshListener)
         }
