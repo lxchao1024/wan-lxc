@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="fsk_base_bg">#6236FF</color>
+    <color name="fsk_green">#6236FF</color>
+    <color name="white">#FFFFFF</color>
 </resources>

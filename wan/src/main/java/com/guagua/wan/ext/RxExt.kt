@@ -1,6 +1,8 @@
 package com.guagua.wan.ext
 
 import android.util.Log
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.guagua.wan.R
 import com.guagua.wan.app.App
 import com.guagua.wan.base.IModel
@@ -53,4 +55,8 @@ fun <T: BaseBean> Observable<T>.ss(model: IModel?, view: IView?, isShowLoading: 
         }
 
     })
+}
+
+fun ImageView.load() {
+    Glide.with(context).load("").into(this)
 }

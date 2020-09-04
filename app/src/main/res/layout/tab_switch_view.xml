@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab"
+    android:layout_width="45dp"
+    android:layout_height="24dp"
+    android:background="@drawable/switch_bg_selected"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/public_panel"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="1dp"
+        android:background="@drawable/switch_white_circle_selected"
+        android:gravity="center"
+        android:text="公"
+        android:textColor="#282828"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/private_panel"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="-1dp"
+        android:background="@drawable/switch_white_circle_selected"
+        android:gravity="center"
+        android:text="我"
+        android:textColor="#282828"
+        android:textSize="14sp" />
+</LinearLayout>
