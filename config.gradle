@@ -18,6 +18,30 @@ ext {
             anko                    : "0.10.7"
     ]
 
+    lifecycleVersion = [
+            lifecycle_version: "2.0.0"
+    ]
+
+    lifecycles = [
+            // ViewModel and LiveData
+            "lifecycle-extensions": "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion.lifecycle_version}",
+            // alternatively - just ViewModel
+            "lifecycle-viewmodel": "androidx.lifecycle:lifecycle-viewmodel:${lifecycleVersion.lifecycle_version}",
+            // alternatively - just LiveData
+            "lifecycle-livedata": "androidx.lifecycle:lifecycle-livedata:${lifecycleVersion.lifecycle_version}",
+            // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI
+            // AndroidX libraries use this lightweight import for Lifecycle
+            "lifecycle-runtime": "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion.lifecycle_version}",
+            // For Kotlin use kapt instead of annotationProcessor
+            "lifecycle-compiler": "androidx.lifecycle:lifecycle-compiler:${lifecycleVersion.lifecycle_version}",
+            // alternately - if using Java8, use the following instead of lifecycle-compiler
+            "lifecycle-common-java8": "androidx.lifecycle:lifecycle-common-java8:${lifecycleVersion.lifecycle_version}",
+            // optional - ReactiveStreams support for LiveData
+            "lifecycle-reactivestreams": "androidx.lifecycle:lifecycle-reactivestreams:${lifecycleVersion.lifecycle_version}",
+            // optional - Test helpers for LiveData
+            "lifecycle-reactivestreams": "androidx.lifecycle:lifecycle-reactivestreams:${lifecycleVersion.lifecycle_version}",
+    ]
+
     retrofit = [
             "retrofit"                : "com.squareup.retrofit2:retrofit:${dependVersion.retrofitSdkVersion}",
             "retrofitConverterGson"   : "com.squareup.retrofit2:converter-gson:${dependVersion.retrofitSdkVersion}",
@@ -79,6 +103,7 @@ ext {
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
     commonLibs = commonDeps.values()
+    lifecycleLibs = lifecycles.values()
 
     annotationProcessorLibs = [otherDeps['glideCompiler']]
 }
