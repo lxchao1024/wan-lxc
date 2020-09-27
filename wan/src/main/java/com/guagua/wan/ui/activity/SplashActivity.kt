@@ -4,16 +4,33 @@ import android.content.Intent
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.guagua.wan.R
+import com.guagua.wan.adapter.MyAdapter
 import com.guagua.wan.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : BaseActivity(), ViewPropertyAnimatorListener {
 
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: MyAdapter
+    private var list = arrayListOf<String>()
+
     override fun attachLayoutRes(): Int = R.layout.activity_splash
 
     override fun initData() {
-        initAnim()
+//        initAnim()
+
+        adapter = MyAdapter(this, list)
+        linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager.stackFromEnd = true
+        linearLayoutManager.scrollToPositionWithOffset(adapter.itemCount - 1, Int.MAX_VALUE)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = linearLayoutManager
+
+
+        list.add("a")
     }
 
     override fun initView() {
