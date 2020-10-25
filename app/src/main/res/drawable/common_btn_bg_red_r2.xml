@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 边角：设置圆角大小 -->
+    <corners android:radius="2dp"/>
+
+    <gradient android:startColor="#FFFC3E4B" android:endColor="#FFFF723B" android:angle="90"/>
+</shape>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity3">
 
     <com.guagua.guagua.gradle363.view.AutoScrollTextView
@@ -16,13 +17,127 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:marqueeRepeatLimit="marquee_forever"
-
         android:singleLine="true"
         android:text="这才是真正的文字跑马灯效果这才是真正的字跑马灯效果这才是真正的"
         android:textColor="#000000"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
-
         app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ListView
+        android:id="@+id/contentList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#f00"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layout_input"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="#fff">
+
+            <ImageView
+                android:id="@+id/iv_face"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="9dp"
+                android:src="@drawable/k_face"
+                tools:ignore="ContentDescription,RtlHardcoded" />
+
+            <EditText
+                android:id="@+id/edit_chat_content"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_toLeftOf="@+id/btn_show_gift_out"
+                android:layout_toRightOf="@id/iv_face"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="戳这里和美女聊点啥……"
+                android:imeOptions="actionSend"
+                android:maxLines="1"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textColorHint="#FFCCCCCC"
+                android:textSize="14dp" />
+
+            <ImageButton
+                android:id="@+id/btn_show_gift_out"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/btn_send"
+                android:background="@null"
+                android:padding="10dp"
+                android:scaleType="center"
+                android:src="@drawable/hall_im_icon_gift" />
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/common_btn_bg_red_r2"
+                android:padding="0dp"
+                android:text="发送"
+                android:textColor="#FFFFFFFF"
+                android:textSize="15dp"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:background="#00f"
+            android:orientation="horizontal" >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="常用语"
+                android:id="@+id/changyong" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_face"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffffff"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:id="@+id/changyongView"
+                android:visibility="gone"
+                android:background="#f00" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/faceViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="230dip"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:id="@+id/faceIndexView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

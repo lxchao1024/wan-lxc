@@ -14,17 +14,17 @@ buildscript {
     ext.buildToolsVersion = '29.0.3'
 
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url'https://maven.aliyun.com/repository/public/' }
+        maven { url'https://maven.aliyun.com/repository/google/' }
+        maven { url'https://maven.aliyun.com/repository/jcenter/' }
+        maven { url'https://maven.aliyun.com/repository/central/' }
         google()
         jcenter()
         maven {
             //本地maven仓库地址
             url uri('./repo')
         }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-        maven { url'https://maven.aliyun.com/repository/public/' }
-        maven { url'https://maven.aliyun.com/repository/google/' }
-        maven { url'https://maven.aliyun.com/repository/jcenter/' }
-        maven { url'https://maven.aliyun.com/repository/central/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
@@ -43,14 +43,14 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-        maven { url "https://jitpack.io" }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         maven { url'https://maven.aliyun.com/repository/public/' }
         maven { url'https://maven.aliyun.com/repository/google/' }
         maven { url'https://maven.aliyun.com/repository/jcenter/' }
         maven { url'https://maven.aliyun.com/repository/central/' }
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
