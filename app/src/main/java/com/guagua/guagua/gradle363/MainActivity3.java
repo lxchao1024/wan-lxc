@@ -44,6 +44,8 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
 
+
+
         mLayoutBottom = findViewById(R.id.layout_bottom);
         mIvFace = findViewById(R.id.iv_face);
         mEditChat = findViewById(R.id.edit_chat_content);
@@ -56,6 +58,7 @@ public class MainActivity3 extends AppCompatActivity {
         changyongView = findViewById(R.id.changyongView);
         faceIndexView = findViewById(R.id.faceIndexView);
         View content = findViewById(R.id.contentList);
+        mIvFace.setTag(R.drawable.k_face);
 
         //设置表情、键盘切换处理
         emotionInputDetector = EmotionInputDetector.with(MainActivity3.this);
@@ -71,11 +74,13 @@ public class MainActivity3 extends AppCompatActivity {
         emotionInputDetector.setmListener(new EmotionInputDetector.DetectorListener() {
             @Override
             public void onEmotionShown() {
+                mIvFace.setTag(R.drawable.keyborad);
                 mIvFace.setImageResource(R.drawable.keyborad);
             }
 
             @Override
             public void onEmotionHide() {
+                mIvFace.setTag(R.drawable.k_face);
                 mIvFace.setImageResource(R.drawable.k_face);
             }
 

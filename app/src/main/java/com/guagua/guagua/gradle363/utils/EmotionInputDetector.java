@@ -15,9 +15,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.ViewPager;
+
+import com.guagua.guagua.gradle363.R;
 
 /**
  * Created by dss886 on 15/9/26.
@@ -95,11 +98,12 @@ public class EmotionInputDetector {
         return this;
     }
 
-    public EmotionInputDetector bindToEmotionButton(View emotionButton) {
+    public EmotionInputDetector bindToEmotionButton(final View emotionButton) {
         emotionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mEmotionLayout.isShown() && eView.isShown()) {
+                Integer resoureId = (Integer) emotionButton.getTag();
+                if (mEmotionLayout.isShown() && null != eView && eView.isShown() && resoureId == R.drawable.k_face) {
                     showEmotionLayout();
                 } else if (mEmotionLayout.isShown()) {
                     lockContentHeight();
@@ -138,11 +142,11 @@ public class EmotionInputDetector {
         emotionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mEmotionLayout.isShown() && pager.isShown()) {
+                if (mEmotionLayout.isShown() && null != pager && pager.isShown()) {
                     showChangYong();
                 } else if (mEmotionLayout.isShown()) {
                     lockContentHeight();
-                    hideEmotionLayout(true);
+                    hideChangYongLayout(true);
                     unlockContentHeightDelayed();
                 } else {
                     if (isSoftInputShown()) {
@@ -202,9 +206,9 @@ public class EmotionInputDetector {
         hideSoftInput();
         mEmotionLayout.getLayoutParams().height = softInputHeight;
         mEmotionLayout.setVisibility(View.VISIBLE);
-        if (mListener != null) {
-            mListener.onEmotionShown();
-        }
+//        if (mListener != null) {
+//            mListener.onEmotionShown();
+//        }
         eView.setVisibility(View.VISIBLE);
         pager.setVisibility(View.GONE);
         linearLayout.setVisibility(View.GONE);
@@ -219,6 +223,18 @@ public class EmotionInputDetector {
             if (mListener != null) {
                 mListener.onEmotionHide();
             }
+        }
+    }
+
+    public void hideChangYongLayout(boolean showSoftInput) {
+        if (mEmotionLayout.isShown()) {
+            mEmotionLayout.setVisibility(View.GONE);
+            if (showSoftInput) {
+                showSoftInput();
+            }
+//            if (mListener != null) {
+//                mListener.onEmotionHide();
+//            }
         }
     }
 
